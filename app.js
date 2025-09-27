@@ -2,6 +2,11 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 
+app.use((req, res, next) => {
+  console.log(`[${new Date().toISOString()}] ${req.ip} ${req.method} ${req.originalUrl} ${req.headers['user-agent']}`);
+  next();
+});
+
 app.get("/", (req, res) => {
   const os = require("os");
   const serverHost = os.hostname();
